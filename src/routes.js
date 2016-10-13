@@ -1,26 +1,19 @@
-// Libary imports
+// Third Party imports
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
+import { Route } from 'react-router';
 
-// User imports
+// Project imports
 import App from './containers/App';
-import Account from './containers/Account';
-import AmountSelect from './containers/AmountSelect';
-import HowItWorks from './components/HowItWorks';
-import LastStep from './components/LastStep';
-import Login from './containers/Login';
-import Sorry from './containers/Sorry';
-import Terms from './containers/Terms';
+
+const greeting = () => {
+  return (
+    <div>Hello There</div>
+  );
+};
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={Login} />
-    <Route path="account" component={Account} />
-    <Route path="last-step" component={LastStep} />
-    <Route path="terms" component={Terms} />
-    <Route path="selection" component={AmountSelect} />
-    <Route path="how-it-works" component={HowItWorks} />
-    <Route path="sorry" component={Sorry} />
+    <Route path="greeting" component={greeting} />
   </Route>
 );
 
