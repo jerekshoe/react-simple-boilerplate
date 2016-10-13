@@ -1,0 +1,36 @@
+@import '../../assets/css/colors';
+
+#account {
+  overflow: hidden;
+
+  h2 {
+    margin-bottom: 23px;
+  }
+
+  button {
+    color: $green;
+    display: block;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  button:last-of-type {
+    margin-top: 18px;
+    margin-bottom: 100px;
+  }
+
+  ul {
+    max-width: 380px;
+    margin: 0 auto;
+    margin-bottom: 18px;
+    padding: 0 10px;
+  }
+
+  li {
+    height: 32px;
+    border-bottom: 1px solid $grey;
+    font-size: 12px;
+    padding-top: 8px;
+  }
+}

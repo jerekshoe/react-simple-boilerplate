@@ -3,6 +3,13 @@ logs
 *.log
 npm-debug.log*
 
+<<<<<<< Updated upstream
+=======
+# distribution files
+dist
+dll
+
+>>>>>>> Stashed changes
 # Runtime data
 pids
 *.pid

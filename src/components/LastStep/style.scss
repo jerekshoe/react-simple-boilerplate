@@ -1,0 +1,55 @@
+#last-step {
+  overflow: hidden;
+
+  h6 {
+    text-align: left;
+  }
+
+  h6:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .buffer {
+    overflow: hidden;
+    padding: 0 15px;
+  }
+
+  section {
+    width: 100%;
+    margin: 26px 0 20px 0;
+    overflow: hidden;
+  }
+
+  section:last-of-type {
+    margin-bottom: 100px;
+    margin-top: 46px;
+  }
+
+  .phoneimage {
+    width: 28%;
+    max-width: 110px;
+    margin-right: 10px;
+  }
+
+  .pumpimage {
+    width: 36%;
+    max-width: 130px;
+    margin-left: 30px;
+  }
+
+  section div {
+    width: 52%;
+  }
+
+  @media only screen and (min-width: 768px ) {
+    .buffer {
+      padding: 0;
+    }
+  }
+
+  @media only screen and (min-width: 992px){
+    section div {
+      width: 64%;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@import './colors';
+@import './fonts';
+
+* {
+  color: $grey;
+  font-family: 'Montserrat Light';
+  text-align: center;
+}
+
+.menu-active {
+  overflow: hidden;
+}
+
+#main {
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+h6 {
+  white-space: pre-line;
+}
+
+.bttn {
+  width: 110px;
+  height: 30px;
+  border-radius: 20px;
+  padding: 5px 0;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  background: none;
+  border: none;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}

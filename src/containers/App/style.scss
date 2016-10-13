@@ -1,0 +1,32 @@
+@import '../../assets/css/base';
+
+#app {
+  overflow: hidden;
+  position: relative;
+}
+
+.contents {
+  min-height: calc(100vh - 50px);
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: -110px;
+  width: 100%;
+}
+
+.contents:after {
+  content: "";
+  display: block;
+  height: 110px;
+}
+
+@media only screen and (min-width: 992px){
+
+    .contents {
+      margin-bottom: -160px;
+    }
+
+    .contents:after {
+      height: 160px;
+    }
+}
