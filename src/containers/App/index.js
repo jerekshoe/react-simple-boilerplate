@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     const { isMenuOpen, toggleMenu } = this.props;
     const showNavbar = this.props.location.pathname !== '/';
-
+    
     return (
       <div id="app">
         {showNavbar && <Navbar onMenuClick={toggleMenu} open={isMenuOpen} />}

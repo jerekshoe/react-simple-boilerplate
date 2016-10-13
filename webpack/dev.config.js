@@ -61,5 +61,6 @@ module.exports = {
     colors: true,
     hot: true,
     progress: true,
+    stats: 'minimal',
   },
 };

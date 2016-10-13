@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'cheap-module-source-map',
   context: path.resolve(__dirname, '..'),
   entry: [
     'babel-polyfill',
@@ -33,9 +33,6 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
-      compress: {
-        warnings: false,
-      },
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
