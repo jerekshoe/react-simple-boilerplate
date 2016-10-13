@@ -5,7 +5,13 @@ npm-debug.log*
 
 # distribution files
 dist
+dll
 
+=======
+# distribution files
+dist
+
+>>>>>>> master
 # Runtime data
 pids
 *.pid

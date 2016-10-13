@@ -1,9 +1,10 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
   cache: true,
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
     'babel-polyfill',
     'bootstrap-loader/extractStyles',
@@ -17,8 +18,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?sourceMap') },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!sass') },
+      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.scss$/, loader: 'style!css!sass' },
       { test: /\.(jpg|png|gif)$/, loader: 'file' },
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file' },
       { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000' },
@@ -26,12 +27,32 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('bundle.css', { allChunks: true }),
+    new ExtractTextPlugin({ filename: 'bundle.css', allChunks: true }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('../dll/react-manifest.json'),
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+      inject: true,
+    }),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    moduleDirectories: ['node_modules'],
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     historyApiFallback: true,
@@ -40,5 +61,6 @@ module.exports = {
     colors: true,
     hot: true,
     progress: true,
+    stats: 'minimal',
   },
 };
