@@ -17,7 +17,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.scss$/, loader: 'style!css!sass' },
       { test: /\.(jpg|png|gif)$/, loader: 'file' },

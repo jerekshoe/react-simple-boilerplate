@@ -18,7 +18,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
       { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style', loader: 'css?sourceMap' }) },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style', loader: 'css!sass' }) },
       { test: /\.(jpg|png|gif)$/, loader: 'file' },
@@ -60,5 +60,8 @@ module.exports = {
       },
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   stats: false,
 };
