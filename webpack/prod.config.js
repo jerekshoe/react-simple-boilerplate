@@ -8,7 +8,6 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: [
     'babel-polyfill',
-    'bootstrap-loader/extractStyles',
     './src/index',
   ],
   output: {
@@ -24,7 +23,6 @@ module.exports = {
       { test: /\.(jpg|png|gif)$/, loader: 'file-loader' },
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' },
       { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000' },
-      { test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports-loader?jQuery=jquery' },
     ],
   },
   plugins: [
@@ -33,6 +31,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
     }),
+    new webpack.PrefetchPlugin('./src/index.js'),
     new HtmlWebpackPlugin({
       template: './index.html',
       minify: {
@@ -53,10 +52,18 @@ module.exports = {
       context: '.',
       manifest: require('../dll/react-manifest.json'),
     }),
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('../dll/other-manifest.json'),
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  stats: 'verbose',
 };

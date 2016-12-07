@@ -7,7 +7,6 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'babel-polyfill',
-    'bootstrap-loader/extractStyles',
     './src/index.js',
   ],
   output: {
@@ -33,6 +32,10 @@ module.exports = {
     new webpack.DllReferencePlugin({
       context: '.',
       manifest: require('../dll/react-manifest.json'),
+    }),
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('../dll/other-manifest.json'),
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
