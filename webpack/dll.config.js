@@ -13,6 +13,13 @@ module.exports = {
       'react-redux',
       'redux-saga',
     ],
+    other: [
+      'babel-polyfill',
+      'core-js',
+      'lodash',
+      'sockjs-client',
+      'react-proxy',
+    ],
   },
 
   output: {

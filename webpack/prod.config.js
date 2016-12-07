@@ -8,7 +8,6 @@ module.exports = {
   context: path.resolve(__dirname, '..'),
   entry: [
     'babel-polyfill',
-    'bootstrap-loader/extractStyles',
     './src/index',
   ],
   output: {
@@ -18,22 +17,21 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style', loader: 'css?sourceMap' }) },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style', loader: 'css!sass' }) },
-      { test: /\.(jpg|png|gif)$/, loader: 'file' },
-      { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file' },
-      { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000' },
-      { test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports?jQuery=jquery' },
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?cacheDirectory' },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' }) },
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader!sass-loader' }) },
+      { test: /\.(jpg|png|gif)$/, loader: 'file-loader' },
+      { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' },
+      { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000' },
     ],
   },
   plugins: [
     new ExtractTextPlugin({ filename: 'bundle.css', allChunks: true }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
     }),
+    new webpack.PrefetchPlugin('./src/index.js'),
     new HtmlWebpackPlugin({
       template: './index.html',
       minify: {
@@ -54,6 +52,10 @@ module.exports = {
       context: '.',
       manifest: require('../dll/react-manifest.json'),
     }),
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('../dll/other-manifest.json'),
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -63,5 +65,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  stats: false,
+  stats: 'verbose',
 };
