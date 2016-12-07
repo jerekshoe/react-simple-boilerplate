@@ -65,5 +65,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  stats: 'verbose',
+  stats: false,
 };
