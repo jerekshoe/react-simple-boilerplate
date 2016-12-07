@@ -62,5 +62,6 @@ module.exports = {
     contentBase: './',
     host: '0.0.0.0',
     hot: true,
+    stats: 'minimal',
   },
 };
