@@ -5,16 +5,31 @@ import { Route } from 'react-router';
 // Project imports
 import App from './containers/App';
 
-const greeting = () => {
-  return (
-    <div>Hello There</div>
-  );
-};
+function errorLoading(err) {
+  console.error('Dynamic page loading failed', err);
+}
 
-const routes = (
-  <Route path="/" component={App}>
-    <Route path="greeting" component={greeting} />
+function loadRoute(cb) {
+  return (module) => cb(null, module.default);
+}
+
+if (typeof System === "undefined") {
+  var System = {
+    import: function(path) {
+      return Promise.resolve(require(path));
+    }
+  };
+}
+
+const getRoutes = store => (
+  <Route path="/" component={App} store={store}>
+    <Route
+      path="greeting"
+      getComponents={(location, cb) => {
+        System.import('./components/Greeting').then(loadRoute(cb)).catch(errorLoading);
+      }}
+    />
   </Route>
 );
 
-export default routes;
+export default getRoutes;

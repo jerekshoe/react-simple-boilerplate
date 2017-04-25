@@ -4,27 +4,27 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
+  cache: true,
+  devtool: 'eval',
   context: path.resolve(__dirname, '..'),
   entry: [
     'babel-polyfill',
-    'bootstrap-loader/extractStyles',
     './src/index',
   ],
   output: {
     path: path.join(__dirname, '..', 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    // chunkFilename: '[name].[chunkhash].chunk.js',
+    publicPath: '/dist/',
   },
   module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?cacheDirectory' },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' }) },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader!sass-loader' }) },
-      { test: /\.(jpg|png|gif)$/, loader: 'file-loader' },
-      { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' },
-      { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000' },
-      { test: /bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports-loader?jQuery=jquery' },
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader?cacheDirectory' },
+      { test: /\.css$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }) },
+      { test: /\.scss$/, use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader'] }) },
+      { test: /\.(jpe?g|png|gif)$/, use: 'file-loader' },
+      { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: 'file-loader' },
+      { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: 'url-loader?limit=10000' },
     ],
   },
   plugins: [

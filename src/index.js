@@ -2,24 +2,24 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { Router, browserHistory, match } from 'react-router';
 
-import routes from './routes';
-import rootReducer from './reducers';
-import rootSaga from './sagas';
+// Project imports
+// import Client from './client';
+import getRoutes from './routes';
+import configureStore from './store';
 
-const sagaMiddleware = createSagaMiddleware();
-const createStoreWithMiddleware = applyMiddleware(sagaMiddleware)(createStore);
-const store = createStoreWithMiddleware(rootReducer,
-  window.devToolsExtension && window.devToolsExtension()
-);
+const store = configureStore();
+const routes = getRoutes(store);
 
-sagaMiddleware.run(rootSaga);
+if (module.hot) {
+  module.hot.accept();
+}
 
-render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
-  </Provider>
-, document.getElementById('main'));
+match({ history: browserHistory, routes }, (error, redirectLocation, renderProps) => {
+  render(
+    <Provider store={store}>
+      <Router {...renderProps} />
+    </Provider>
+  , document.getElementById('main'));
+});

@@ -5,7 +5,8 @@ module.exports = {
   context: process.cwd(),
   entry: {
     react: [
-      'jquery',
+      'babel-polyfill',
+      'core-js',
       'react',
       'react-dom',
       'react-router',
@@ -34,16 +35,6 @@ module.exports = {
       // require function has been assigned to. This must match the
       // output.library option above
       name: '[name]',
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
     }),
   ],
 };
