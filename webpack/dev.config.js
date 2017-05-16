@@ -20,7 +20,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader?cacheDirectory' },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.(jpg|png|gif)$/, use: 'file-loader' },
+      { test: /\.(jpe?g|png|gif)$/, use: 'file-loader' },
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: 'file-loader' },
       { test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: 'url-loader?limit=10000' },
     ],

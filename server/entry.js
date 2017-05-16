@@ -1,3 +1,11 @@
-require('babel-register');
+require('babel-register')({
+  plugins: [
+    [
+      'babel-plugin-transform-require-ignore',
+      {
+        extensions: ['.scss', '.jpg', '.png', '.css']
+      }
+    ]
+  ]
+});
 require('./server');
-require.extensions['.scss'] = function () {}

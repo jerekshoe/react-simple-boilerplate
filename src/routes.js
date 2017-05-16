@@ -1,23 +1,16 @@
 // Third Party imports
 import React from 'react';
-import { Route } from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 
 // Project imports
 import App from './containers/App';
+import { errorLoading, loadRoute } from './helpers';
 
-function errorLoading(err) {
-  console.error('Dynamic page loading failed', err);
-}
-
-function loadRoute(cb) {
-  return (module) => cb(null, module.default);
-}
-
-if (typeof System === "undefined") {
+if (typeof System === 'undefined') {
   var System = {
-    import: function(path) {
-      return Promise.resolve(require(path));
-    }
+    import: (path) => (
+      Promise.resolve(require(path))
+    )
   };
 }
 

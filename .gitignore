@@ -7,11 +7,6 @@ npm-debug.log*
 dist
 dll
 
-=======
-# distribution files
-dist
-
->>>>>>> master
 # Runtime data
 pids
 *.pid
@@ -44,3 +39,6 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Mac Finder Files
+.DS_Store

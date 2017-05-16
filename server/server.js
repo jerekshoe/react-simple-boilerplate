@@ -40,13 +40,14 @@ app.use((req, res) => {
         <html>
           <head>
             <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
             <link rel='stylesheet' href='dist/bundle.css'>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
           </head>
           <body>
             <div id="main">${component}</div>
             <script src="dll/dll.react.js" type="text/javascript"></script>
-            <script type="text/javascript" src="dist/bundle.js"></script>
+            <script src="dist/bundle.js" type="text/javascript"></script>
           </body>
         </html>`
       );
@@ -57,4 +58,4 @@ app.use((req, res) => {
 });
 
 const port = process.env.PORT || 8080;
-const server = app.listen(port, () => console.log('Server started', server.address()))
+const server = app.listen(port, () => console.log('Server started', server.address()));
